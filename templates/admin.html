@@ -1,0 +1,153 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+管理画面 | すいれん館 ライブラリー
+{% endblock %}
+
+
+{% block content %}
+
+<section class="admin-page">
+
+    <div class="admin-header">
+
+        <p class="admin-label">
+            ADMIN
+        </p>
+
+        <h1 class="page-title">
+            管理画面
+        </h1>
+
+        <p class="page-description">
+            蔵書データやホーム画面の表示設定を管理します。
+        </p>
+
+    </div>
+
+
+    <!-- CSV更新 -->
+
+    <section class="admin-card">
+
+        <h2>
+            CSVデータ更新
+        </h2>
+
+        <p>
+            外部システムから受け取った
+            books.csv をアップロードします。
+        </p>
+
+
+        <form action="#" method="post" enctype="multipart/form-data">
+
+            <input
+                type="file"
+                name="books_csv"
+                accept=".csv"
+                class="admin-file-input"
+            >
+
+            <button
+                type="submit"
+                class="admin-button"
+            >
+                CSVをアップロード
+            </button>
+
+        </form>
+
+    </section>
+
+
+    <!-- MV設定 -->
+
+    <section class="admin-card">
+
+        <h2>
+            メインビジュアル設定
+        </h2>
+
+        <p>
+            ホーム画面の「今月の一冊」に表示する本を指定します。
+        </p>
+
+
+        <div class="admin-form-row">
+
+            <label for="mv_book">
+                書籍ID
+            </label>
+
+            <input
+                type="number"
+                id="mv_book"
+                name="mv_book"
+                placeholder="例：15"
+            >
+
+        </div>
+
+
+        <button
+            type="button"
+            class="admin-button"
+        >
+            MVに設定
+        </button>
+
+    </section>
+
+
+    <!-- ピックアップ設定 -->
+
+    <section class="admin-card">
+
+        <h2>
+            オーナーのイチオシ設定
+        </h2>
+
+        <p>
+            ホーム画面の「オーナーのイチオシ」に表示する本を指定します。
+        </p>
+
+
+        <div class="admin-form-row">
+
+            <label for="pickup_book">
+                書籍ID
+            </label>
+
+            <input
+                type="number"
+                id="pickup_book"
+                name="pickup_book"
+                placeholder="例：8"
+            >
+
+        </div>
+
+
+        <button
+            type="button"
+            class="admin-button"
+        >
+            イチオシに追加
+        </button>
+
+    </section>
+
+    <!-- ログアウトボタン -->
+    <section class="logout-section">
+
+        <a href="{{ url_for('logout') }}" class="logout-button">
+            ログアウト
+        </a>
+
+    </section>
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,327 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+ホーム | すいれん館 ライブラリー
+{% endblock %}
+
+
+{% block content %}
+
+{% macro book_card(book) %}
+
+<a href="{{ url_for('book_detail', book_id=book['book_id']) }}" class="book-card">
+
+    {% if book["cover_image"] %}
+
+    <img src="{{ url_for('static', filename=book['cover_image']) }}" alt="{{ book['title'] }}" class="book-cover">
+
+    {% else %}
+
+    <div class="book-cover placeholder-cover">
+        BOOK
+    </div>
+
+    {% endif %}
+
+    <p class="book-title">
+        {{ book["title"] }}
+    </p>
+
+    <p class="book-author">
+        {{ book["author"] or "著者情報なし" }}
+    </p>
+
+</a>
+
+{% endmacro %}
+
+
+<!-- ==============================
+     ヘッダー
+============================== -->
+
+<header class="home-header">
+
+    <div class="logo-area">
+
+        <h1 class="site-title">
+            すいれん館
+        </h1>
+
+        <p class="site-subtitle">
+            Library
+        </p>
+
+    </div>
+
+</header>
+
+
+
+<!-- ==============================
+     カテゴリーナビ
+============================== -->
+
+<section class="category-nav">
+
+    <a href="#" class="category-item active">
+        すべて
+    </a>
+
+    <a href="{{ url_for('search', category='書籍') }}" class="category-item">
+        書籍
+    </a>
+
+    <a href="{{ url_for('search', category='漫画') }}" class="category-item">
+        漫画
+    </a>
+
+    <a href="{{ url_for('search', category='雑誌') }}" class="category-item">
+        雑誌
+    </a>
+
+    <a href="{{ url_for('search', category='絵本') }}" class="category-item">
+        絵本
+    </a>
+
+    <a href="{{ url_for('search', category='写真集') }}" class="category-item">
+        写真集
+    </a>
+
+    <a href="{{ url_for('search', category='DVD') }}" class="category-item">
+        DVD
+    </a>
+
+    <a href="{{ url_for('search', category='ボードゲーム') }}" class="category-item">
+        ボードゲーム
+    </a>
+
+</section>
+
+
+
+<!-- ==============================
+     MV / HERO
+============================== -->
+
+{% if featured_book %}
+
+<section class="hero">
+
+    <div class="hero-image">
+
+        {% if featured_book["cover_image"] %}
+
+        <img src="{{ url_for(
+                    'static',
+                    filename=featured_book['cover_image']
+                ) }}" alt="{{ featured_book['title'] }}" class="book-cover">
+
+        {% else %}
+
+        <div class="book-cover placeholder-cover">
+            BOOK
+        </div>
+
+        {% endif %}
+
+    </div>
+
+    <div class="hero-content">
+
+        <p class="hero-label">
+            今月の一冊
+        </p>
+
+        <h2 class="hero-title">
+            {{ featured_book["title"] }}
+        </h2>
+
+        <p class="hero-description">
+            {% if featured_book["author"] %}
+            {{ featured_book["author"] }}
+            {% else %}
+            オーナーが選んだ、今おすすめしたい一冊。
+            {% endif %}
+        </p>
+
+        <a href="{{ url_for(
+            'book_detail',
+            book_id=featured_book['book_id']
+        ) }}" class="hero-button">
+            詳細を見る
+        </a>
+
+    </div>
+
+</section>
+
+{% endif %}
+
+
+<!-- ==============================
+     新着
+============================== -->
+
+<section class="book-section">
+
+    <h2 class="section-title">
+        🆕 新着入荷
+    </h2>
+
+    <div class="carousel-wrapper">
+
+        <!-- 左ボタン -->
+        <button class="carousel-button prev" type="button" aria-label="前の本を表示">
+            ‹
+        </button>
+
+        <!-- 本の一覧 -->
+        <div class="book-carousel">
+
+            {% for book in new_books %}
+
+            {{ book_card(book) }}
+
+            {% endfor %}
+
+        </div>
+
+        <!-- 右ボタン -->
+        <button class="carousel-button next" type="button" aria-label="次の本を表示">
+            ›
+        </button>
+
+    </div>
+
+</section>
+
+
+
+<!-- ==============================
+     オーナーのイチオシ
+============================== -->
+
+{% if owner_picks %}
+
+<section class="book-section">
+
+    <h2 class="section-title">
+        👑 オーナーのイチオシ
+    </h2>
+
+    <div class="carousel-wrapper">
+
+        <button class="carousel-button prev" type="button" aria-label="前の本を表示">
+            ‹
+        </button>
+
+        <div class="book-carousel">
+
+            {% for book in owner_picks %}
+
+            {{ book_card(book) }}
+
+            {% endfor %}
+
+        </div>
+
+        <button class="carousel-button next" type="button" aria-label="次の本を表示">
+            ›
+        </button>
+
+    </div>
+
+</section>
+
+{% endif %}
+
+
+
+<!-- ==============================
+     みんなのオススメ
+============================== -->
+
+{% for section in mood_sections %}
+
+    {% if section["books"] %}
+
+    <section class="book-section">
+
+        <h2 class="section-title">
+            {{ section["title"] }}
+        </h2>
+
+        <div class="carousel-wrapper">
+
+            <button class="carousel-button prev"
+                    type="button"
+                    aria-label="前の本を表示">
+                ‹
+            </button>
+
+            <div class="book-carousel">
+
+                {% for book in section["books"] %}
+
+                    {{ book_card(book) }}
+
+                {% endfor %}
+
+            </div>
+
+            <button class="carousel-button next"
+                    type="button"
+                    aria-label="次の本を表示">
+                ›
+            </button>
+
+        </div>
+
+    </section>
+
+    {% endif %}
+
+{% endfor %}
+
+
+<script>
+
+    document.addEventListener("DOMContentLoaded", function () {
+
+        const wrappers = document.querySelectorAll(".carousel-wrapper");
+
+        wrappers.forEach(function (wrapper) {
+
+            const carousel = wrapper.querySelector(".book-carousel");
+            const prevButton = wrapper.querySelector(".prev");
+            const nextButton = wrapper.querySelector(".next");
+
+
+            nextButton.addEventListener("click", function () {
+
+                carousel.scrollBy({
+                    left: 700,
+                    behavior: "smooth"
+                });
+
+            });
+
+
+            prevButton.addEventListener("click", function () {
+
+                carousel.scrollBy({
+                    left: -700,
+                    behavior: "smooth"
+                });
+
+            });
+
+        });
+
+    });
+
+</script>
+
+{% endblock %}

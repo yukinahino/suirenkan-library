@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# OS / Editor
+.DS_Store
+.vscode/
+
+# SQLite
+*.db
+*.sqlite
+*.sqlite3
+
+# Import / history data
+data/import/
+data/import_history/

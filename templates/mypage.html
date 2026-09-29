@@ -1,0 +1,271 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+マイページ | すいれん館 ライブラリー
+{% endblock %}
+
+
+{% block content %}
+
+<section class="mypage">
+
+    <!-- ユーザー情報 -->
+
+    <section class="profile-card">
+
+        <div class="profile-icon">
+            USER
+        </div>
+
+        <div class="profile-info">
+
+            <h1>
+                すいれん館 さん
+            </h1>
+
+            <p>
+                読書を楽しみましょう。
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- テーマ切替 -->
+
+    <section class="mypage-block">
+
+        <h2 class="mypage-title">
+            表示テーマ
+        </h2>
+
+        <div class="theme-buttons">
+
+            <button type="button" class="theme-button active" id="dark-theme-button">
+                ダーク
+            </button>
+
+            <button type="button" class="theme-button" id="light-theme-button">
+                ライト
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- 読書中 -->
+
+    <section class="book-section">
+
+        <h2 class="section-title">
+            📖 読書中
+        </h2>
+
+
+        <div class="book-carousel">
+
+            <a href="{{ url_for('book_detail', book_id=1) }}" class="book-card">
+
+                <div class="book-cover placeholder-cover">
+                    BOOK
+                </div>
+
+                <p class="book-title">
+                    読書中の本 01
+                </p>
+
+                <p class="book-author">
+                    著者名
+                </p>
+
+            </a>
+
+
+            <a href="{{ url_for('book_detail', book_id=1) }}" class="book-card">
+
+                <div class="book-cover placeholder-cover">
+                    BOOK
+                </div>
+
+                <p class="book-title">
+                    読書中の本 02
+                </p>
+
+                <p class="book-author">
+                    著者名
+                </p>
+
+            </a>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- 評価済み -->
+
+    <section class="book-section">
+
+        <h2 class="section-title">
+            👍 評価した本
+        </h2>
+
+
+        <div class="book-carousel">
+
+            <a href="{{ url_for('book_detail', book_id=1) }}" class="book-card">
+
+                <div class="book-cover placeholder-cover">
+                    BOOK
+                </div>
+
+                <p class="book-title">
+                    評価した本 01
+                </p>
+
+                <p class="book-author">
+                    著者名
+                </p>
+
+            </a>
+
+
+            <a href="{{ url_for('book_detail', book_id=1) }}" class="book-card">
+
+                <div class="book-cover placeholder-cover">
+                    BOOK
+                </div>
+
+                <p class="book-title">
+                    評価した本 02
+                </p>
+
+                <p class="book-author">
+                    著者名
+                </p>
+
+            </a>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- マイリスト -->
+
+    <section class="book-section">
+
+        <h2 class="section-title">
+            ♡ マイリスト
+        </h2>
+
+
+        <div class="book-carousel">
+
+            <a href="{{ url_for('book_detail', book_id=1) }}" class="book-card">
+
+                <div class="book-cover placeholder-cover">
+                    BOOK
+                </div>
+
+                <p class="book-title">
+                    保存した本 01
+                </p>
+
+                <p class="book-author">
+                    著者名
+                </p>
+
+            </a>
+
+
+            <a href="{{ url_for('book_detail', book_id=1) }}" class="book-card">
+
+                <div class="book-cover placeholder-cover">
+                    BOOK
+                </div>
+
+                <p class="book-title">
+                    保存した本 02
+                </p>
+
+                <p class="book-author">
+                    著者名
+                </p>
+
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- ログアウトUI -->
+    <section class="logout-section">
+
+        <a href="{{ url_for('logout') }}" class="logout-button">
+            ログアウト
+        </a>
+
+    </section>
+
+</section>
+
+<script>
+
+    const darkButton =
+        document.getElementById("dark-theme-button");
+
+    const lightButton =
+        document.getElementById("light-theme-button");
+
+    const savedTheme = localStorage.getItem("theme");
+
+    if (savedTheme === "light") {
+
+        lightButton.classList.add("active");
+        darkButton.classList.remove("active");
+
+    } else {
+
+        darkButton.classList.add("active");
+        lightButton.classList.remove("active");
+
+    }
+
+
+    // ダークモード
+    darkButton.addEventListener("click", function () {
+
+        document.body.classList.remove("light-theme");
+
+        localStorage.setItem("theme", "dark");
+
+        darkButton.classList.add("active");
+        lightButton.classList.remove("active");
+
+    });
+
+
+    // ライトモード
+    lightButton.addEventListener("click", function () {
+
+        document.body.classList.add("light-theme");
+
+        localStorage.setItem("theme", "light");
+
+        lightButton.classList.add("active");
+        darkButton.classList.remove("active");
+
+    });
+
+</script>
+
+{% endblock %}

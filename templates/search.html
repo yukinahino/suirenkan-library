@@ -1,0 +1,259 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+検索 | すいれん館 ライブラリー
+{% endblock %}
+
+
+{% block content %}
+
+
+<!-- ==============================
+     検索ページヘッダー
+============================== -->
+
+<section class="search-page">
+
+    <div class="search-header">
+
+        <h1 class="page-title">
+            本を探す
+        </h1>
+
+        <p class="page-description">
+            タイトルや著者名、気になるタグから
+            すいれん館の本を探せます。
+        </p>
+
+    </div>
+
+
+
+    <!-- ==============================
+         キーワード検索
+    ============================== -->
+
+    <form class="search-form" action="{{ url_for('search') }}" method="get">
+
+        <input type="search" name="keyword" class="search-input" placeholder="キーワードで検索" value="{{ keyword }}">
+
+        <button type="submit" class="search-submit">
+            検索
+        </button>
+
+    </form>
+
+
+
+    <!-- ==============================
+         人気のタグ
+    ============================== -->
+
+    <section class="search-block">
+
+        <h2 class="search-block-title">
+            人気のタグ
+        </h2>
+
+
+        <div class="search-tags">
+
+            <a href="{{ url_for('search', tag='学びたい') }}" class="search-tag">
+                #学びたい
+            </a>
+        
+            <a href="{{ url_for('search', tag='気軽に読める') }}" class="search-tag">
+                #気軽に読める
+            </a>
+        
+            <a href="{{ url_for('search', tag='仕事に役立つ') }}" class="search-tag">
+                #仕事に役立つ
+            </a>
+        
+            <a href="{{ url_for('search', tag='考えさせられる') }}" class="search-tag">
+                #考えさせられる
+            </a>
+        
+            <a href="{{ url_for('search', tag='週末にじっくり') }}" class="search-tag">
+                #週末にじっくり
+            </a>
+        
+            <a href="{{ url_for('search', tag='創作のヒント') }}" class="search-tag">
+                #創作のヒント
+            </a>
+        
+        </div>
+
+    </section>
+
+
+
+    <!-- ==============================
+         カテゴリから探す
+    ============================== -->
+
+    <section class="search-block">
+
+        <h2 class="search-block-title">
+            カテゴリから探す
+        </h2>
+
+
+        <div class="category-grid">
+
+            <a href="{{ url_for('search', category='書籍') }}" class="category-card">
+                <span class="category-card-icon">
+                    📚
+                </span>
+
+                <span class="category-card-label">
+                    書籍
+                </span>
+            </a>
+
+
+            <a href="{{ url_for('search', category='漫画') }}" class="category-card">
+                <span class="category-card-icon">
+                    📖
+                </span>
+
+                <span class="category-card-label">
+                    漫画
+                </span>
+            </a>
+
+
+            <a href="{{ url_for('search', category='雑誌') }}" class="category-card">
+                <span class="category-card-icon">
+                    📰
+                </span>
+
+                <span class="category-card-label">
+                    雑誌
+                </span>
+            </a>
+
+
+            <a href="{{ url_for('search', category='絵本') }}" class="category-card">
+                <span class="category-card-icon">
+                    🪅
+                </span>
+
+                <span class="category-card-label">
+                    絵本
+                </span>
+            </a>
+
+
+            <a href="{{ url_for('search', category='写真集・画集') }}" class="category-card">
+                <span class="category-card-icon">
+                    🖼️
+                </span>
+
+                <span class="category-card-label">
+                    写真集・画集
+                </span>
+            </a>
+
+            <a href="{{ url_for('search', category='DVD') }}" class="category-card">
+                <span class="category-card-icon">
+                    💿
+                </span>
+
+                <span class="category-card-label">
+                    DVD
+                </span>
+            </a>
+
+            <a href="{{ url_for('search', category='ボードゲーム') }}" class="category-card">
+                <span class="category-card-icon">
+                    🎲
+                </span>
+
+                <span class="category-card-label">
+                    ボードゲーム
+                </span>
+            </a>
+
+        </div>
+
+    </section>
+
+    <!-- ==============================
+     検索結果
+============================== -->
+
+    {% if keyword or tag or category %}
+
+    <section class="search-block">
+
+        <h2 class="search-block-title">
+
+            {% if tag %}
+                「#{{ tag }}」の本
+            {% elif category %}
+                「{{ category }}」の本
+            {% else %}
+                「{{ keyword }}」の検索結果
+            {% endif %}
+        
+        </h2>
+
+
+        {% if books %}
+
+        <div class="search-results">
+
+            {% for book in books %}
+
+            <a href="{{ url_for('book_detail', book_id=book['book_id']) }}" class="search-book-card">
+
+                {% if book["cover_image"] %}
+
+                <img src="{{ url_for('static', filename=book['cover_image']) }}" alt="{{ book['title'] }}"
+                    class="search-book-cover">
+
+                {% else %}
+
+                <div class="search-book-cover placeholder-cover">
+                    BOOK
+                </div>
+
+                {% endif %}
+
+
+                <div class="search-book-info">
+
+                    <h3>
+                        {{ book["title"] }}
+                    </h3>
+
+                    <p class="search-book-author">
+                        {{ book["author"] or "著者情報なし" }}
+                    </p>
+
+                </div>
+
+            </a>
+
+            {% endfor %}
+
+        </div>
+
+
+        {% else %}
+
+        <p class="page-description">
+            該当する本が見つかりませんでした。
+        </p>
+
+        {% endif %}
+
+    </section>
+
+    {% endif %}
+
+</section>
+
+{% endblock %}

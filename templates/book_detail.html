@@ -1,0 +1,428 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+本の詳細 | すいれん館 ライブラリー
+{% endblock %}
+
+
+{% block content %}
+
+
+<!-- ==============================
+     詳細ページ上部
+============================== -->
+
+<section class="book-detail">
+
+    <!-- 書影 -->
+    <div class="detail-cover-area">
+
+        {% if book["cover_image"] %}
+
+        <img src="{{ url_for('static', filename=book['cover_image']) }}" alt="{{ book['title'] }}" class="detail-cover">
+
+        {% else %}
+
+        <div class="detail-cover placeholder-cover">
+            BOOK
+        </div>
+
+        {% endif %}
+
+    </div>
+
+
+    <!-- 本の基本情報 -->
+    <div class="detail-info">
+
+        <p class="detail-category">
+            {{ book["media_type"] or "書籍" }}
+        </p>
+
+        <h1 class="detail-title">
+            {{ book["title"] }}
+        </h1>
+
+        <p class="detail-author">
+            {{ book["author"] or "著者情報なし" }}
+        </p>
+
+
+        <!-- 貸出状況 -->
+
+        {% if book["is_available"] %}
+
+        <div class="rental-status available">
+
+            <span class="status-dot"></span>
+
+            <span>
+                貸出可
+            </span>
+
+        </div>
+
+        {% else %}
+
+        <div class="rental-status">
+
+            <span class="status-dot"></span>
+
+            <span>
+                貸出中
+            </span>
+
+        </div>
+
+        {% endif %}
+
+
+        <!-- あらすじ -->
+        <div class="detail-description">
+
+            <h2>
+                この本について
+            </h2>
+
+            <p>
+                {{ book["description"] or "紹介文はまだ登録されていません。" }}
+            </p>
+
+        </div>
+
+
+        <!-- 書誌情報 -->
+        <div class="detail-description">
+
+            <h2>
+                書誌情報
+            </h2>
+
+            <p>
+                出版社：{{ book["publisher"] or "未登録" }}
+            </p>
+
+            <p>
+                発売日：{{ book["release_date"] or "未登録" }}
+            </p>
+
+            <p>
+                ジャンル：{{ book["genre"] or "未登録" }}
+            </p>
+
+            <p>
+                配架場所：{{ book["location"] or "未登録" }}
+            </p>
+
+        </div>
+
+
+        <!-- タグ -->
+        {% if book_tags %}
+
+        <div class="detail-tags">
+
+            {% for tag in book_tags %}
+
+            <a href="{{ url_for('search', tag=tag['tag_name']) }}" class="tag">
+                #{{ tag["tag_name"] }}
+            </a>
+
+            {% endfor %}
+
+        </div>
+
+        {% endif %}
+
+
+        <!-- アクション -->
+        <div class="detail-actions">
+
+            <button type="button" class="action-button primary">
+                ＋ マイリスト
+            </button>
+
+            <button type="button" class="action-button">
+                📖 読んでる
+            </button>
+
+            <button type="button" class="action-button">
+                ✓ 読んだ
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ==============================
+     評価スタンプ
+============================== -->
+
+<section class="reaction-section">
+
+    <h2 class="section-title">
+        この本、どうだった？
+    </h2>
+
+
+    <div class="reaction-list">
+
+        <button type="button" class="reaction-button">
+
+            <span class="reaction-icon">
+                👍
+            </span>
+
+            <span class="reaction-label">
+                いいね
+            </span>
+
+            <span class="reaction-count">
+                5
+            </span>
+
+        </button>
+
+
+        <button type="button" class="reaction-button">
+
+            <span class="reaction-icon">
+                😢
+            </span>
+
+            <span class="reaction-label">
+                泣ける
+            </span>
+
+            <span class="reaction-count">
+                2
+            </span>
+
+        </button>
+
+
+        <button type="button" class="reaction-button">
+
+            <span class="reaction-icon">
+                ⚡
+            </span>
+
+            <span class="reaction-label">
+                スカッと
+            </span>
+
+            <span class="reaction-count">
+                3
+            </span>
+
+        </button>
+
+
+        <button type="button" class="reaction-button">
+
+            <span class="reaction-icon">
+                💭
+            </span>
+
+            <span class="reaction-label">
+                考えさせられる
+            </span>
+
+            <span class="reaction-count">
+                4
+            </span>
+
+        </button>
+
+    </div>
+
+</section>
+
+
+
+<!-- ==============================
+     共有
+============================== -->
+
+<section class="share-section">
+
+    <h2 class="section-title">
+        この本をシェア
+    </h2>
+
+
+    <div class="share-actions">
+
+        <button type="button" class="share-button" onclick="shareToLine()">
+            LINE
+        </button>
+
+        <button type="button" class="share-button" onclick="shareToX()">
+            X
+        </button>
+
+        <button type="button" class="share-button" onclick="copyBookUrl()">
+            URLをコピー
+        </button>
+
+    </div>
+
+</section>
+
+
+
+<!-- ==============================
+     こちらもオススメ
+============================== -->
+
+<section class="book-section">
+
+    <h2 class="section-title">
+        こちらもオススメ
+    </h2>
+
+
+    <div class="book-carousel">
+
+
+        <a href="{{ url_for('book_detail', book_id=1) }}" class="book-card">
+
+            <div class="book-cover placeholder-cover">
+                BOOK
+            </div>
+
+            <p class="book-title">
+                おすすめの本 01
+            </p>
+
+            <p class="book-author">
+                著者名
+            </p>
+
+        </a>
+
+
+        <a href="{{ url_for('book_detail', book_id=1) }}" class="book-card">
+
+            <div class="book-cover placeholder-cover">
+                BOOK
+            </div>
+
+            <p class="book-title">
+                おすすめの本 02
+            </p>
+
+            <p class="book-author">
+                著者名
+            </p>
+
+        </a>
+
+
+        <a href="{{ url_for('book_detail', book_id=1) }}" class="book-card">
+
+            <div class="book-cover placeholder-cover">
+                BOOK
+            </div>
+
+            <p class="book-title">
+                おすすめの本 03
+            </p>
+
+            <p class="book-author">
+                著者名
+            </p>
+
+        </a>
+
+
+        <a href="{{ url_for('book_detail', book_id=1) }}" class="book-card">
+
+            <div class="book-cover placeholder-cover">
+                BOOK
+            </div>
+
+            <p class="book-title">
+                おすすめの本 04
+            </p>
+
+            <p class="book-author">
+                著者名
+            </p>
+
+        </a>
+
+
+    </div>
+
+</section>
+
+
+<script>
+    // 現在開いている本のURL
+    const bookUrl = window.location.href;
+
+    // 本のタイトル
+    const bookTitle = {
+        {
+            book["title"] | tojson
+        }
+    };
+
+
+    // LINEでシェア
+    function shareToLine() {
+
+        const text =
+            bookTitle + "\n" +
+            "すいれん館ライブラリー\n" +
+            bookUrl;
+
+        const lineUrl =
+            "https://line.me/R/msg/text/?" +
+            encodeURIComponent(text);
+
+        window.open(lineUrl, "_blank");
+    }
+
+
+    // Xでシェア
+    function shareToX() {
+
+        const text =
+            bookTitle + " | すいれん館ライブラリー";
+
+        const xUrl =
+            "https://twitter.com/intent/tweet?text=" +
+            encodeURIComponent(text) +
+            "&url=" +
+            encodeURIComponent(bookUrl);
+
+        window.open(xUrl, "_blank");
+    }
+
+
+    // URLをコピー
+    async function copyBookUrl() {
+
+        try {
+
+            await navigator.clipboard.writeText(bookUrl);
+
+            alert("本のURLをコピーしました！");
+
+        } catch (error) {
+
+            alert("URLをコピーできませんでした。");
+
+        }
+    }
+</script>
+
+
+{% endblock %}

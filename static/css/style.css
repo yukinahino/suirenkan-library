@@ -1,0 +1,1938 @@
+/* =========================================
+   すいれん館 ライブラリー検索システム
+   共通スタイル
+========================================= */
+
+
+/* -----------------------------
+   基本設定
+----------------------------- */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Helvetica Neue",
+        "Yu Gothic",
+        "YuGothic",
+        "Hiragino Kaku Gothic ProN",
+        Arial,
+        sans-serif;
+
+    background-color: #111111;
+    color: #ffffff;
+
+    line-height: 1.6;
+
+    /* 下部固定ナビに本文が隠れないようにする */
+    padding-bottom: 90px;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+
+/* -----------------------------
+   テーマ
+----------------------------- */
+
+.dark-theme {
+    background-color: #111111;
+    color: #ffffff;
+}
+
+
+/* -----------------------------
+   メインコンテンツ
+----------------------------- */
+
+.main-content {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+
+/* =========================================
+   HOME
+========================================= */
+
+
+/* -----------------------------
+   ヘッダー
+----------------------------- */
+
+.home-header {
+    padding: 22px 20px 14px;
+}
+
+.logo-area {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+}
+
+.site-title {
+    margin: 0;
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+}
+
+.site-subtitle {
+    margin: 0;
+    color: #999999;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+}
+
+
+/* -----------------------------
+   カテゴリーナビ
+----------------------------- */
+
+.category-nav {
+    display: flex;
+    gap: 8px;
+
+    padding: 0 20px 18px;
+
+    overflow-x: auto;
+
+    /* スクロールバー非表示 */
+    scrollbar-width: none;
+}
+
+.category-nav::-webkit-scrollbar {
+    display: none;
+}
+
+.category-item {
+    flex-shrink: 0;
+
+    padding: 7px 14px;
+
+    border-radius: 999px;
+
+    background-color: #262626;
+    color: #cccccc;
+
+    font-size: 0.85rem;
+
+    transition:
+        background-color 0.2s,
+        color 0.2s;
+}
+
+.category-item:hover {
+    background-color: #3a3a3a;
+}
+
+.category-item.active {
+    background-color: #ffffff;
+    color: #111111;
+}
+
+
+/* -----------------------------
+   HERO / MV
+----------------------------- */
+
+.hero {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+
+    margin: 0 20px 34px;
+
+    padding: 24px;
+
+    min-height: 280px;
+
+    border-radius: 18px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #303030 0%,
+            #181818 60%,
+            #101010 100%
+        );
+}
+
+.hero-image {
+    flex-shrink: 0;
+}
+
+.hero .book-cover {
+    width: 120px;
+    aspect-ratio: 2 / 3;
+}
+
+.hero-content {
+    flex: 1;
+}
+
+.hero-label {
+    margin: 0 0 8px;
+
+    color: #bcbcbc;
+    font-size: 0.8rem;
+
+    letter-spacing: 0.08em;
+}
+
+.hero-title {
+    margin: 0 0 12px;
+
+    font-size: 1.8rem;
+    line-height: 1.4;
+}
+
+.hero-description {
+    margin: 0 0 20px;
+
+    color: #c7c7c7;
+    font-size: 0.9rem;
+}
+
+.hero-button {
+    display: inline-block;
+
+    padding: 10px 18px;
+
+    border-radius: 999px;
+
+    background-color: #ffffff;
+    color: #111111;
+
+    font-size: 0.85rem;
+    font-weight: 700;
+
+    transition:
+        transform 0.2s,
+        opacity 0.2s;
+}
+
+.hero-button:hover {
+    opacity: 0.85;
+    transform: translateY(-1px);
+}
+
+
+/* =========================================
+   書籍カルーセル
+========================================= */
+
+
+/* -----------------------------
+   セクション
+----------------------------- */
+
+.book-section {
+    margin-bottom: 36px;
+}
+
+.section-title {
+    margin: 0 0 14px;
+    padding: 0 20px;
+
+    font-size: 1.05rem;
+    font-weight: 700;
+}
+
+
+/* -----------------------------
+   横スクロール/ カルーセル
+----------------------------- */
+
+.book-carousel {
+    display: flex;
+
+    gap: 14px;
+
+    overflow-x: auto;
+
+    padding: 0 20px 8px;
+
+    scroll-snap-type: x proximity;
+
+    scrollbar-width: none;
+}
+
+.book-carousel::-webkit-scrollbar {
+    display: none;
+}
+
+
+/* -----------------------------
+   書籍カード
+----------------------------- */
+
+.book-card {
+    flex: 0 0 130px;
+
+    scroll-snap-align: start;
+
+    transition:
+        transform 0.2s,
+        opacity 0.2s;
+}
+
+.book-card:hover {
+    transform: translateY(-4px);
+    opacity: 0.9;
+}
+
+
+/* -----------------------------
+   書影
+----------------------------- */
+
+.book-cover {
+    width: 100%;
+
+    aspect-ratio: 2 / 3;
+
+    border-radius: 6px;
+
+    overflow: hidden;
+
+    background-color: #333333;
+
+    box-shadow:
+        0 6px 16px rgba(0, 0, 0, 0.35);
+}
+
+
+/* 仮の書影 */
+
+.placeholder-cover {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background:
+        linear-gradient(
+            145deg,
+            #555555,
+            #222222
+        );
+
+    color: #bbbbbb;
+
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+}
+
+
+/* -----------------------------
+   書籍情報
+----------------------------- */
+
+.book-title {
+    margin: 8px 0 2px;
+
+    font-size: 0.85rem;
+    font-weight: 600;
+
+    line-height: 1.4;
+
+    /* 長すぎるタイトルを2行で省略 */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.book-author {
+    margin: 0;
+
+    color: #888888;
+
+    font-size: 0.72rem;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+/* =========================================
+   下部固定ナビゲーション
+========================================= */
+
+.bottom-nav {
+    /* スマホでスクロールしても下部ナビが画面下に残り続ける挙動 */
+    position: fixed;
+
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    z-index: 100;
+
+    display: flex;
+
+    justify-content: space-around;
+    align-items: center;
+
+    height: 70px;
+
+    background-color: rgba(18, 18, 18, 0.96);
+
+    border-top: 1px solid #2f2f2f;
+
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.nav-item {
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: 2px;
+
+    height: 100%;
+
+    color: #999999;
+
+    transition: color 0.2s;
+}
+
+.nav-item:hover {
+    color: #ffffff;
+}
+
+.nav-icon {
+    font-size: 1.4rem;
+    line-height: 1;
+}
+
+.nav-label {
+    font-size: 0.65rem;
+}
+
+
+/* =========================================
+   タブレット以上
+========================================= */
+
+@media screen and (min-width: 768px) {
+
+    .home-header {
+        padding-left: 32px;
+        padding-right: 32px;
+    }
+
+    .category-nav {
+        padding-left: 32px;
+        padding-right: 32px;
+    }
+
+    .hero {
+        margin-left: 32px;
+        margin-right: 32px;
+
+        padding: 36px;
+
+        min-height: 360px;
+    }
+
+    .hero .book-cover {
+        width: 180px;
+    }
+
+    .hero-title {
+        font-size: 2.4rem;
+    }
+
+    .section-title {
+        padding-left: 32px;
+        padding-right: 32px;
+
+        font-size: 1.25rem;
+    }
+
+    .book-carousel {
+        padding-left: 32px;
+        padding-right: 32px;
+
+        gap: 18px;
+    }
+
+    .book-card {
+        flex-basis: 160px;
+    }
+}
+
+
+/* =========================================
+   PC
+========================================= */
+
+@media screen and (min-width: 1024px) {
+
+    body {
+        padding-bottom: 0;
+    }
+
+    .main-content {
+        padding-bottom: 40px;
+    }
+
+    .hero {
+        min-height: 400px;
+    }
+
+    .hero .book-cover {
+        width: 210px;
+    }
+
+    .hero-title {
+        font-size: 3rem;
+    }
+
+    .book-card {
+        flex-basis: 180px;
+    }
+
+    /*
+       PCでも下部ナビを残したい場合は
+       この部分を削除してください
+    */
+
+    .bottom-nav {
+        position: static;
+
+        max-width: 1200px;
+        margin: 0 auto;
+
+        border-top: 1px solid #2f2f2f;
+    }
+}
+
+
+
+
+/* =========================================
+   BOOK DETAIL
+========================================= */
+
+
+/* -----------------------------
+   詳細ページ本体
+----------------------------- */
+
+.book-detail {
+    display: flex;
+    flex-direction: column;
+
+    gap: 28px;
+
+    padding: 28px 20px 36px;
+}
+
+
+/* -----------------------------
+   詳細ページ書影
+----------------------------- */
+
+.detail-cover-area {
+    display: flex;
+    justify-content: center;
+}
+
+.detail-cover {
+    width: 180px;
+
+    aspect-ratio: 2 / 3;
+
+    border-radius: 8px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.45);
+}
+
+
+/* -----------------------------
+   本情報
+----------------------------- */
+
+.detail-info {
+    width: 100%;
+}
+
+.detail-category {
+    margin: 0 0 6px;
+
+    color: #999999;
+
+    font-size: 0.8rem;
+}
+
+.detail-title {
+    margin: 0 0 8px;
+
+    font-size: 1.8rem;
+    line-height: 1.4;
+}
+
+.detail-author {
+    margin: 0 0 18px;
+
+    color: #aaaaaa;
+
+    font-size: 0.95rem;
+}
+
+
+/* -----------------------------
+   貸出状況
+----------------------------- */
+
+.rental-status {
+    display: inline-flex;
+    align-items: center;
+
+    gap: 7px;
+
+    margin-bottom: 18px;
+
+    padding: 7px 12px;
+
+    border-radius: 999px;
+
+    font-size: 0.82rem;
+
+    background-color: #232323;
+}
+
+.status-dot {
+    display: inline-block;
+
+    width: 8px;
+    height: 8px;
+
+    border-radius: 50%;
+}
+
+.rental-status.available .status-dot {
+    background-color: #39d98a;
+}
+
+.rental-status.unavailable .status-dot {
+    background-color: #ff5c5c;
+}
+
+
+/* -----------------------------
+   タグ
+----------------------------- */
+
+.detail-tags {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+    margin-bottom: 28px;
+}
+
+.tag {
+    display: inline-block;
+
+    padding: 6px 11px;
+
+    border-radius: 999px;
+
+    background-color: #262626;
+    color: #cccccc;
+
+    font-size: 0.78rem;
+
+    transition:
+        background-color 0.2s,
+        color 0.2s;
+}
+
+.tag:hover {
+    background-color: #3a3a3a;
+    color: #ffffff;
+}
+
+
+/* -----------------------------
+   あらすじ
+----------------------------- */
+
+.detail-description {
+    margin-bottom: 28px;
+}
+
+.detail-description h2 {
+    margin: 0 0 10px;
+
+    font-size: 1rem;
+}
+
+.detail-description p {
+    margin: 0;
+
+    color: #c3c3c3;
+
+    font-size: 0.9rem;
+    line-height: 1.9;
+}
+
+
+/* -----------------------------
+   本へのアクション
+----------------------------- */
+
+.detail-actions {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 10px;
+}
+
+.action-button {
+    min-height: 46px;
+
+    padding: 10px 14px;
+
+    border: 1px solid #444444;
+    border-radius: 10px;
+
+    background-color: #202020;
+    color: #ffffff;
+
+    font-size: 0.85rem;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s,
+        transform 0.2s;
+}
+
+.action-button:hover {
+    background-color: #303030;
+
+    transform: translateY(-1px);
+}
+
+.action-button.primary {
+    grid-column: 1 / -1;
+
+    background-color: #ffffff;
+    color: #111111;
+
+    border-color: #ffffff;
+}
+
+.action-button.primary:hover {
+    background-color: #dddddd;
+}
+
+
+/* =========================================
+   REACTION
+========================================= */
+
+.reaction-section {
+    margin-bottom: 36px;
+}
+
+.reaction-list {
+    display: flex;
+
+    gap: 10px;
+
+    overflow-x: auto;
+
+    padding: 0 20px 8px;
+
+    scrollbar-width: none;
+}
+
+.reaction-list::-webkit-scrollbar {
+    display: none;
+}
+
+.reaction-button {
+    flex-shrink: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    min-width: 90px;
+    min-height: 90px;
+
+    padding: 12px;
+
+    border: 1px solid #343434;
+    border-radius: 14px;
+
+    background-color: #1e1e1e;
+    color: #ffffff;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s,
+        transform 0.2s;
+}
+
+.reaction-button:hover {
+    background-color: #2b2b2b;
+
+    transform: translateY(-2px);
+}
+
+.reaction-icon {
+    font-size: 1.5rem;
+}
+
+.reaction-label {
+    margin-top: 4px;
+
+    font-size: 0.72rem;
+}
+
+.reaction-count {
+    margin-top: 2px;
+
+    color: #8d8d8d;
+
+    font-size: 0.68rem;
+}
+
+
+/* =========================================
+   SHARE
+========================================= */
+
+.share-section {
+    margin-bottom: 40px;
+}
+
+.share-actions {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 10px;
+
+    padding: 0 20px;
+}
+
+.share-button {
+    padding: 9px 16px;
+
+    border: 1px solid #3a3a3a;
+    border-radius: 999px;
+
+    background-color: #1e1e1e;
+    color: #ffffff;
+
+    font-size: 0.8rem;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s,
+        transform 0.2s;
+}
+
+.share-button:hover {
+    background-color: #303030;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================
+   BOOK DETAIL : TABLET
+========================================= */
+
+@media screen and (min-width: 768px) {
+
+    .book-detail {
+        flex-direction: row;
+
+        align-items: flex-start;
+
+        gap: 48px;
+
+        padding: 48px 32px 56px;
+    }
+
+    .detail-cover-area {
+        flex-shrink: 0;
+    }
+
+    .detail-cover {
+        width: 240px;
+    }
+
+    .detail-title {
+        font-size: 2.2rem;
+    }
+
+    .detail-actions {
+        max-width: 520px;
+    }
+
+    .reaction-list {
+        padding-left: 32px;
+        padding-right: 32px;
+    }
+
+    .share-actions {
+        padding-left: 32px;
+        padding-right: 32px;
+    }
+}
+
+
+/* =========================================
+   BOOK DETAIL : PC
+========================================= */
+
+@media screen and (min-width: 1024px) {
+
+    .book-detail {
+        gap: 64px;
+
+        padding-top: 60px;
+        padding-bottom: 70px;
+    }
+
+    .detail-cover {
+        width: 280px;
+    }
+
+    .detail-title {
+        font-size: 2.6rem;
+    }
+
+    .detail-description {
+        max-width: 680px;
+    }
+}
+
+
+
+/* =========================================
+   SEARCH PAGE
+========================================= */
+
+.search-page {
+    padding: 28px 20px 40px;
+}
+
+.search-header {
+    margin-bottom: 24px;
+}
+
+.page-title {
+    margin: 0 0 8px;
+    font-size: 1.8rem;
+}
+
+.page-description {
+    margin: 0;
+    color: #999999;
+    font-size: 0.9rem;
+}
+
+
+/* -----------------------------
+   検索フォーム
+----------------------------- */
+
+.search-form {
+    display: flex;
+    gap: 8px;
+
+    margin-bottom: 36px;
+}
+
+.search-input {
+    flex: 1;
+
+    min-width: 0;
+
+    padding: 13px 15px;
+
+    border: 1px solid #333333;
+    border-radius: 10px;
+
+    background-color: #1d1d1d;
+    color: #ffffff;
+
+    font-size: 0.9rem;
+
+    outline: none;
+}
+
+.search-input:focus {
+    border-color: #777777;
+}
+
+.search-input::placeholder {
+    color: #777777;
+}
+
+.search-submit {
+    padding: 0 18px;
+
+    border: none;
+    border-radius: 10px;
+
+    background-color: #ffffff;
+    color: #111111;
+
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+
+/* -----------------------------
+   検索ブロック
+----------------------------- */
+
+.search-block {
+    margin-bottom: 38px;
+}
+
+.search-block-title {
+    margin: 0 0 14px;
+
+    font-size: 1.05rem;
+}
+
+
+/* -----------------------------
+   タグ
+----------------------------- */
+
+.search-tags {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 8px;
+}
+
+.search-tag {
+    padding: 7px 12px;
+
+    border-radius: 999px;
+
+    background-color: #252525;
+    color: #cccccc;
+
+    font-size: 0.8rem;
+}
+
+
+/* -----------------------------
+   カテゴリ
+----------------------------- */
+
+.category-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 10px;
+}
+
+.category-card {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    min-height: 64px;
+
+    padding: 14px;
+
+    border: 1px solid #303030;
+    border-radius: 12px;
+
+    background-color: #1c1c1c;
+}
+
+.category-card-icon {
+    font-size: 1.35rem;
+}
+
+.category-card-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+
+/* -----------------------------
+   検索結果
+----------------------------- */
+
+.search-results {
+    display: flex;
+    flex-direction: column;
+
+    gap: 14px;
+}
+
+.search-book-card {
+    display: flex;
+
+    gap: 14px;
+
+    padding: 12px;
+
+    border-radius: 12px;
+
+    background-color: #1a1a1a;
+}
+
+.search-book-cover {
+    flex-shrink: 0;
+
+    width: 80px;
+
+    aspect-ratio: 2 / 3;
+
+    border-radius: 5px;
+}
+
+.search-book-info {
+    flex: 1;
+
+    min-width: 0;
+}
+
+.search-book-info h3 {
+    margin: 4px 0 5px;
+
+    font-size: 0.95rem;
+}
+
+.search-book-author {
+    margin: 0 0 10px;
+
+    color: #888888;
+
+    font-size: 0.75rem;
+}
+
+.search-book-tags {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 5px;
+}
+
+.search-book-tags span {
+    color: #aaaaaa;
+
+    font-size: 0.7rem;
+}
+
+
+/* =========================================
+   SEARCH : TABLET / PC
+========================================= */
+
+@media screen and (min-width: 768px) {
+
+    .search-page {
+        padding:
+            40px 32px 60px;
+    }
+
+    .page-title {
+        font-size: 2.2rem;
+    }
+
+    .search-form {
+        max-width: 700px;
+    }
+
+    .category-grid {
+        grid-template-columns:
+            repeat(5, 1fr);
+    }
+
+    .search-results {
+        display: grid;
+
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+}
+
+
+
+/* =========================================
+   LOGIN
+========================================= */
+
+.login-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: calc(100vh - 90px);
+
+    padding: 40px 20px;
+}
+
+.login-box {
+    width: 100%;
+    max-width: 420px;
+}
+
+.login-logo {
+    margin-bottom: 36px;
+}
+
+.login-logo h1 {
+    margin: 0;
+
+    font-size: 1.6rem;
+    letter-spacing: 0.1em;
+}
+
+.login-logo p {
+    margin: 2px 0 0;
+
+    color: #888888;
+
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+}
+
+.login-message {
+    margin-bottom: 30px;
+}
+
+.login-message h2 {
+    margin: 0 0 10px;
+
+    font-size: 2rem;
+    line-height: 1.4;
+}
+
+.login-message p {
+    margin: 0;
+
+    color: #999999;
+    font-size: 0.9rem;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+
+    gap: 18px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+
+    gap: 7px;
+}
+
+.form-group label {
+    font-size: 0.8rem;
+    color: #bbbbbb;
+}
+
+.form-group input {
+    width: 100%;
+
+    padding: 13px 14px;
+
+    border: 1px solid #333333;
+    border-radius: 10px;
+
+    background-color: #1d1d1d;
+    color: #ffffff;
+
+    font-size: 0.9rem;
+
+    outline: none;
+}
+
+.form-group input:focus {
+    border-color: #777777;
+}
+
+.login-button {
+    margin-top: 8px;
+
+    padding: 13px;
+
+    border: none;
+    border-radius: 999px;
+
+    background-color: #ffffff;
+    color: #111111;
+
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+.login-note {
+    margin-top: 20px;
+
+    color: #777777;
+
+    font-size: 0.72rem;
+    text-align: center;
+}
+
+
+/* =========================================
+   ADMIN
+========================================= */
+
+.admin-page {
+    padding: 30px 20px 50px;
+}
+
+.admin-header {
+    margin-bottom: 30px;
+}
+
+.admin-label {
+    margin: 0 0 5px;
+
+    color: #888888;
+
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+}
+
+.admin-card {
+    margin-bottom: 18px;
+
+    padding: 20px;
+
+    border: 1px solid #303030;
+    border-radius: 14px;
+
+    background-color: #191919;
+}
+
+.admin-card h2 {
+    margin: 0 0 8px;
+
+    font-size: 1.05rem;
+}
+
+.admin-card p {
+    margin: 0 0 18px;
+
+    color: #999999;
+
+    font-size: 0.82rem;
+}
+
+.admin-file-input {
+    display: block;
+
+    width: 100%;
+
+    margin-bottom: 14px;
+
+    color: #cccccc;
+}
+
+.admin-form-row {
+    display: flex;
+    flex-direction: column;
+
+    gap: 7px;
+
+    margin-bottom: 14px;
+}
+
+.admin-form-row label {
+    font-size: 0.8rem;
+}
+
+.admin-form-row input {
+    padding: 11px 12px;
+
+    border: 1px solid #333333;
+    border-radius: 8px;
+
+    background-color: #111111;
+    color: #ffffff;
+}
+
+.admin-button {
+    padding: 10px 16px;
+
+    border: none;
+    border-radius: 8px;
+
+    background-color: #ffffff;
+    color: #111111;
+
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+
+/* =========================================
+   MY PAGE
+========================================= */
+
+.mypage {
+    padding-top: 28px;
+}
+
+.profile-card {
+    display: flex;
+    align-items: center;
+
+    gap: 16px;
+
+    margin: 0 20px 34px;
+
+    padding: 18px;
+
+    border: 1px solid #303030;
+    border-radius: 14px;
+
+    background-color: #191919;
+}
+
+.profile-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    width: 64px;
+    height: 64px;
+
+    border-radius: 50%;
+
+    background-color: #333333;
+    color: #aaaaaa;
+
+    font-size: 0.65rem;
+}
+
+.profile-info h1 {
+    margin: 0 0 4px;
+
+    font-size: 1.1rem;
+}
+
+.profile-info p {
+    margin: 0;
+
+    color: #888888;
+
+    font-size: 0.78rem;
+}
+
+.mypage-block {
+    margin-bottom: 36px;
+
+    padding: 0 20px;
+}
+
+.mypage-title {
+    margin: 0 0 12px;
+
+    font-size: 1rem;
+}
+
+.theme-buttons {
+    display: flex;
+
+    gap: 8px;
+}
+
+.theme-button {
+    padding: 8px 14px;
+
+    border: 1px solid #333333;
+    border-radius: 999px;
+
+    background-color: #222222;
+    color: #cccccc;
+
+    cursor: pointer;
+}
+
+.theme-button.active {
+    background-color: #ffffff;
+    color: #111111;
+}
+
+
+/* =========================================
+   LOGOUT
+========================================= */
+
+.logout-section {
+    margin: 40px 20px;
+}
+
+.logout-button {
+    display: block;
+
+    width: 100%;
+
+    padding: 12px 16px;
+
+    border: 1px solid #444444;
+    border-radius: 10px;
+
+    background-color: transparent;
+    color: #cccccc;
+
+    font-size: 0.85rem;
+    text-align: center;
+
+    transition:
+        background-color 0.2s,
+        color 0.2s;
+}
+
+.logout-button:hover {
+    background-color: #222222;
+    color: #ffffff;
+}
+
+
+/* =========================================
+   TABLET / PC
+========================================= */
+
+@media screen and (min-width: 768px) {
+
+    .admin-page {
+        padding:
+            40px 32px 60px;
+    }
+
+    .admin-card {
+        max-width: 760px;
+
+        padding: 26px;
+    }
+
+    .profile-card {
+        margin-left: 32px;
+        margin-right: 32px;
+
+        max-width: 760px;
+    }
+
+    .mypage-block {
+        padding-left: 32px;
+        padding-right: 32px;
+    }
+}
+
+/* =========================================
+　　管理画面確認用CSS
+   =========================================*/
+
+.admin-preview-link {
+    display: block;
+
+    margin-top: 14px;
+
+    color: #999999;
+
+    font-size: 0.8rem;
+    text-align: center;
+}
+
+.admin-preview-link:hover {
+    color: #ffffff;
+}
+
+/* ==============================
+   Book Carousel Navigation
+============================== */
+
+.carousel-wrapper {
+    position: relative;
+}
+
+/* 横スクロールする本棚 */
+.book-carousel {
+    display: flex;
+    gap: 24px;
+
+    overflow-x: auto;
+    scroll-behavior: smooth;
+
+    /* スクロールバーを非表示 */
+    scrollbar-width: none;
+}
+
+.book-carousel::-webkit-scrollbar {
+    display: none;
+}
+
+/* カードが縮まないようにする */
+.book-card {
+    flex: 0 0 220px;
+}
+
+
+/* ==============================
+   Carousel Buttons
+============================== */
+
+.carousel-button {
+    position: absolute;
+    top: 40%;
+    transform: translateY(-50%);
+
+    z-index: 10;
+
+    width: 48px;
+    height: 80px;
+
+    border: none;
+    border-radius: 8px;
+
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+
+    font-size: 40px;
+
+    cursor: pointer;
+
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+
+/* カルーセルにマウスを乗せると表示 */
+
+.carousel-wrapper:hover .carousel-button {
+    opacity: 1;
+}
+
+
+.carousel-button.prev {
+    left: 0;
+}
+
+.carousel-button.next {
+    right: 0;
+}
+
+
+.carousel-button:hover {
+    background: rgba(0, 0, 0, 0.9);
+}
+
+/* =========================================
+   ライトテーマ切り替え
+========================================= */
+
+body.light-theme {
+    background-color: #f5f5f5;
+    color: #222222;
+}
+
+
+/* HOME */
+
+.light-theme .site-subtitle,
+.light-theme .book-author,
+.light-theme .page-description,
+.light-theme .detail-category,
+.light-theme .detail-author {
+    color: #666666;
+}
+
+.light-theme .category-item {
+    background-color: #e7e7e7;
+    color: #555555;
+}
+
+.light-theme .category-item:hover {
+    background-color: #dddddd;
+}
+
+.light-theme .category-item.active {
+    background-color: #222222;
+    color: #ffffff;
+}
+
+.light-theme .hero {
+    background:
+        linear-gradient(
+            135deg,
+            #eeeeee 0%,
+            #dddddd 60%,
+            #d3d3d3 100%
+        );
+}
+
+.light-theme .hero-label,
+.light-theme .hero-description {
+    color: #555555;
+}
+
+.light-theme .hero-button {
+    background-color: #222222;
+    color: #ffffff;
+}
+
+
+/* BOOK */
+
+.light-theme .book-cover {
+    background-color: #dddddd;
+}
+
+.light-theme .placeholder-cover {
+    background:
+        linear-gradient(
+            145deg,
+            #eeeeee,
+            #cccccc
+        );
+
+    color: #666666;
+}
+
+
+/* BOTTOM NAV */
+
+.light-theme .bottom-nav {
+    background-color: rgba(245, 245, 245, 0.96);
+    border-top-color: #dddddd;
+}
+
+.light-theme .nav-item {
+    color: #777777;
+}
+
+.light-theme .nav-item:hover {
+    color: #111111;
+}
+
+
+/* BOOK DETAIL */
+
+.light-theme .rental-status {
+    background-color: #e5e5e5;
+}
+
+.light-theme .tag {
+    background-color: #e5e5e5;
+    color: #555555;
+}
+
+.light-theme .tag:hover {
+    background-color: #d5d5d5;
+    color: #111111;
+}
+
+.light-theme .detail-description p {
+    color: #555555;
+}
+
+.light-theme .action-button,
+.light-theme .reaction-button,
+.light-theme .share-button {
+    border-color: #d0d0d0;
+    background-color: #ffffff;
+    color: #222222;
+}
+
+.light-theme .action-button:hover,
+.light-theme .reaction-button:hover,
+.light-theme .share-button:hover {
+    background-color: #eeeeee;
+}
+
+.light-theme .action-button.primary {
+    background-color: #222222;
+    color: #ffffff;
+    border-color: #222222;
+}
+
+
+/* SEARCH */
+
+.light-theme .search-input {
+    border-color: #cccccc;
+    background-color: #ffffff;
+    color: #222222;
+}
+
+.light-theme .search-submit {
+    background-color: #222222;
+    color: #ffffff;
+}
+
+.light-theme .search-tag {
+    background-color: #e5e5e5;
+    color: #555555;
+}
+
+.light-theme .category-card,
+.light-theme .search-book-card {
+    border-color: #dddddd;
+    background-color: #ffffff;
+}
+
+.light-theme .search-book-author,
+.light-theme .search-book-tags span {
+    color: #666666;
+}
+
+
+/* LOGIN */
+
+.light-theme .login-logo p,
+.light-theme .login-message p,
+.light-theme .login-note {
+    color: #666666;
+}
+
+.light-theme .form-group label {
+    color: #555555;
+}
+
+.light-theme .form-group input {
+    border-color: #cccccc;
+    background-color: #ffffff;
+    color: #222222;
+}
+
+.light-theme .login-button {
+    background-color: #222222;
+    color: #ffffff;
+}
+
+
+/* ADMIN */
+
+.light-theme .admin-label,
+.light-theme .admin-card p,
+.light-theme .admin-file-input {
+    color: #666666;
+}
+
+.light-theme .admin-card {
+    border-color: #dddddd;
+    background-color: #ffffff;
+}
+
+.light-theme .admin-form-row input {
+    border-color: #cccccc;
+    background-color: #ffffff;
+    color: #222222;
+}
+
+.light-theme .admin-button {
+    background-color: #222222;
+    color: #ffffff;
+}
+
+
+/* MY PAGE */
+
+.light-theme .profile-card {
+    border-color: #dddddd;
+    background-color: #ffffff;
+}
+
+.light-theme .profile-icon {
+    background-color: #e5e5e5;
+    color: #666666;
+}
+
+.light-theme .profile-info p {
+    color: #666666;
+}
+
+.light-theme .theme-button {
+    border-color: #cccccc;
+    background-color: #eeeeee;
+    color: #555555;
+}
+
+.light-theme .theme-button.active {
+    background-color: #222222;
+    color: #ffffff;
+}
+
+
+/* LOGOUT */
+
+.light-theme .logout-button {
+    border-color: #cccccc;
+    color: #555555;
+}
+
+.light-theme .logout-button:hover {
+    background-color: #e5e5e5;
+    color: #111111;
+}
+
+
+/* CAROUSEL */
+
+.light-theme .carousel-button {
+    background: rgba(255, 255, 255, 0.85);
+    color: #222222;
+}
+
+.light-theme .carousel-button:hover {
+    background: rgba(255, 255, 255, 0.95);
+}

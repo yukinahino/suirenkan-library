@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+ログイン | すいれん館 ライブラリー
+{% endblock %}
+
+
+{% block content %}
+
+<section class="login-page">
+
+    <div class="login-box">
+
+        <div class="login-logo">
+            <h1>すいれん館</h1>
+            <p>Library</p>
+        </div>
+
+
+        <div class="login-message">
+
+            <h2>
+                本と出会う、
+                <br>
+                たのしむ場所
+            </h2>
+
+            <p>
+                すいれん館のライブラリーへようこそ。
+            </p>
+
+        </div>
+
+
+        <form class="login-form" action="{{ url_for('login') }}" method="post">
+
+            <div class="form-group">
+
+                <label for="user_id">
+                    ユーザーID
+                </label>
+
+                <input type="text" id="user_id" name="user_id" placeholder="ユーザーIDを入力" required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="password">
+                    パスワード
+                </label>
+
+                <input type="password" id="password" name="password" placeholder="パスワードを入力" required>
+
+            </div>
+
+            {% if error %}
+            <p class="login-error">
+                {{ error }}
+            </p>
+            {% endif %}
+
+            <button type="submit" class="login-button">
+                ログイン
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
+
+{% endblock %}
