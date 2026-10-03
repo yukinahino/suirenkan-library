@@ -44,6 +44,79 @@
 
     </form>
 
+    <!-- ==============================
+     検索結果
+    ============================== -->
+
+    {% if keyword or tag or category %}
+
+    <section class="search-block">
+
+        <h2 class="search-block-title">
+
+            {% if tag %}
+            「#{{ tag }}」の本
+            {% elif category %}
+            「{{ category }}」の本
+            {% else %}
+            「{{ keyword }}」の検索結果
+            {% endif %}
+
+        </h2>
+
+
+        {% if books %}
+
+        <div class="search-results">
+
+            {% for book in books %}
+
+            <a href="{{ url_for('book_detail', book_id=book['book_id']) }}" class="search-book-card">
+
+                {% if book["cover_image"] %}
+
+                <img src="{{ url_for('static', filename=book['cover_image']) }}" alt="{{ book['title'] }}"
+                    class="search-book-cover">
+
+                {% else %}
+
+                <div class="search-book-cover placeholder-cover">
+                    BOOK
+                </div>
+
+                {% endif %}
+
+
+                <div class="search-book-info">
+
+                    <h3>
+                        {{ book["title"] }}
+                    </h3>
+
+                    <p class="search-book-author">
+                        {{ book["author"] or "著者情報なし" }}
+                    </p>
+
+                </div>
+
+            </a>
+
+            {% endfor %}
+
+        </div>
+
+
+        {% else %}
+
+        <p class="page-description">
+            該当する本が見つかりませんでした。
+        </p>
+
+        {% endif %}
+
+    </section>
+
+    {% endif %}
 
 
     <!-- ==============================
@@ -62,27 +135,27 @@
             <a href="{{ url_for('search', tag='学びたい') }}" class="search-tag">
                 #学びたい
             </a>
-        
+
             <a href="{{ url_for('search', tag='気軽に読める') }}" class="search-tag">
                 #気軽に読める
             </a>
-        
+
             <a href="{{ url_for('search', tag='仕事に役立つ') }}" class="search-tag">
                 #仕事に役立つ
             </a>
-        
+
             <a href="{{ url_for('search', tag='考えさせられる') }}" class="search-tag">
                 #考えさせられる
             </a>
-        
+
             <a href="{{ url_for('search', tag='週末にじっくり') }}" class="search-tag">
                 #週末にじっくり
             </a>
-        
+
             <a href="{{ url_for('search', tag='創作のヒント') }}" class="search-tag">
                 #創作のヒント
             </a>
-        
+
         </div>
 
     </section>
@@ -179,80 +252,6 @@
         </div>
 
     </section>
-
-    <!-- ==============================
-     検索結果
-============================== -->
-
-    {% if keyword or tag or category %}
-
-    <section class="search-block">
-
-        <h2 class="search-block-title">
-
-            {% if tag %}
-                「#{{ tag }}」の本
-            {% elif category %}
-                「{{ category }}」の本
-            {% else %}
-                「{{ keyword }}」の検索結果
-            {% endif %}
-        
-        </h2>
-
-
-        {% if books %}
-
-        <div class="search-results">
-
-            {% for book in books %}
-
-            <a href="{{ url_for('book_detail', book_id=book['book_id']) }}" class="search-book-card">
-
-                {% if book["cover_image"] %}
-
-                <img src="{{ url_for('static', filename=book['cover_image']) }}" alt="{{ book['title'] }}"
-                    class="search-book-cover">
-
-                {% else %}
-
-                <div class="search-book-cover placeholder-cover">
-                    BOOK
-                </div>
-
-                {% endif %}
-
-
-                <div class="search-book-info">
-
-                    <h3>
-                        {{ book["title"] }}
-                    </h3>
-
-                    <p class="search-book-author">
-                        {{ book["author"] or "著者情報なし" }}
-                    </p>
-
-                </div>
-
-            </a>
-
-            {% endfor %}
-
-        </div>
-
-
-        {% else %}
-
-        <p class="page-description">
-            該当する本が見つかりませんでした。
-        </p>
-
-        {% endif %}
-
-    </section>
-
-    {% endif %}
 
 </section>
 
